@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "pl.mansfeld.persona"
+    versionCode = "12"
+    version     = "1.2" >
+
+  <platform name="android"> 
+	  <allow-intent href="market:*" /> 
+	  <preference name="android-minSdkVersion" value="12" /> 
+	  <preference name="android-targetSdkVersion" value="26" /> 
+  </platform>	
+  
+  <name>Persona</name>
+  <description>
+      Persona = Projekt demo.
+  </description>
+  <author href="https://mansfeld.pl" email="pawel@mansfeld.pl">
+      Paweł Mansfeld
+  </author>
+</widget>

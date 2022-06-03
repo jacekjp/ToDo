@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Nazwa apliakcji</title>
+    </head>
+    <body>
+     <!-- Ciało aplikacji -->
+        <form id="todoForm">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Tytuł</label>
+            <input type="text" class="form-control" id="todo_title" placeholder="" value="" required>
+            
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Termin</label>
+            <input type="datetime-local" class="form-control" id="todo_date" placeholder="" value="" required>
+            
+          </div>
+		  <div class="col-md-12">
+            <label for="lastName">Uwagi</label>
+            <textarea class="form-control" id="todo_content" placeholder="" required></textarea>
+            
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Zapisz zadanie</button>
+      </form>
+        
+        
+    </body>
+    <script>
+$(document).ready(function(){
+
+var db;
+db = openDatabase('persona', '1.0', 'persona', 65536);
+db.transaction(
+	function(transaction){
+		transaction.executeSql(
+			'CREATE TABLE IF NOT EXISTS todos' + '(todo_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+			todo_date DATETIME NOT NULL, todo_title TEXT NOT NULL, todo_content TEXT NOT NULL);'
+		);
+	}
+);
+
+$('#todoForm').submit(function(e){
+e.preventDefault();
+
+	db.transaction(
+		function(transaction){
+			transaction.executeSql(
+				'INSERT INTO todos' + '(todo_date, todo_title, todo_content) VALUES (?,?,?);',
+				[$('#todo_date').val(), $('#todo_title').val(), $('#todo_content').val()],
+				function(){
+					location.href="todolist.html";
+				}
+			);
+		}
+	);
+});
+});			
+
+</script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+<!--    <script src="js/popper.min.js"></script>-->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
